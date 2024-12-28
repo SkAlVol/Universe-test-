@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.EventSystems; // Не забудьте добавить, чтобы использовать EventSystem
+using UnityEngine.EventSystems; 
 
 public class PauseManager : MonoBehaviour
 {
@@ -11,12 +11,12 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
-        // Изначально активируем mainCamera, отключаем pauseCamera и скрываем курсор
+        
         mainCamera.enabled = true;
         pauseCamera.enabled = false;
         pauseMenuUI.SetActive(false);
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; // Блокирует курсор в центре экрана
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 
     void Update()
@@ -32,35 +32,35 @@ public class PauseManager : MonoBehaviour
 
     public void Resume()
     {
-        // Возвращаемся к mainCamera, скрываем меню и курсор
+        
         mainCamera.enabled = true;
         pauseCamera.enabled = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
 
-        // Отключаем курсор и блокируем его
+        // ГЋГІГЄГ«ГѕГ·Г ГҐГ¬ ГЄГіГ°Г±Г®Г° ГЁ ГЎГ«Г®ГЄГЁГ°ГіГҐГ¬ ГҐГЈГ®
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Pause()
     {
-        // Переключаемся на pauseCamera, показываем меню и включаем курсор
+        
         mainCamera.enabled = false;
         pauseCamera.enabled = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
 
-        // Делаем курсор свободным через задержку
-        Invoke(nameof(ShowCursor), 0.1f); // Вызываем ShowCursor с небольшой задержкой
+        
+        Invoke(nameof(ShowCursor), 0.1f); 
     }
 
     private void ShowCursor()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        EventSystem.current.SetSelectedGameObject(null); // Снимаем выделение, чтобы курсор можно было использовать
+        EventSystem.current.SetSelectedGameObject(null); 
     }
 }
