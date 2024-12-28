@@ -56,7 +56,7 @@ public class ScreenSettings : MonoBehaviour
     {
         int resolutionIndex = resolutionDropdown.value;
 
-        // Ïðèìåíÿåì ðàçðåøåíèå ñ òåêóùåé ÷àñòîòîé îáíîâëåíèÿ
+       
         foreach (Resolution res in resolutions)
         {
             string selectedOption = $"{res.width} x {res.height}";
