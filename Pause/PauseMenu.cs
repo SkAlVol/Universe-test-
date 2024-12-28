@@ -10,7 +10,7 @@ public class PauseMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // Клавиша для вызова меню паузы
+        if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (isPaused)
             {
@@ -40,7 +40,7 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
 
-        // Показываем и разблокируем курсор
+        
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
