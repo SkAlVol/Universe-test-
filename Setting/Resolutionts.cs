@@ -4,24 +4,24 @@ using System.Collections.Generic;
 
 public class ScreenSettings : MonoBehaviour
 {
-    public Dropdown resolutionDropdown; // Ссылка на Dropdown для разрешения
-    private Resolution[] resolutions; // Список доступных разрешений
+    public Dropdown resolutionDropdown; 
+    private Resolution[] resolutions; 
 
     void Start()
     {
-        // Выводим текущее разрешение экрана в консоль
+        
         Debug.Log($"Current Resolution: {Screen.currentResolution.width} x {Screen.currentResolution.height}, Refresh Rate: {Screen.currentResolution.refreshRate} Hz");
 
         resolutions = Screen.resolutions;
         PopulateResolutionDropdown();
     }
 
-    // Заполняем Dropdown для разрешения
+    
     private void PopulateResolutionDropdown()
     {
         resolutionDropdown.ClearOptions();
 
-        // Список для уникальных опций разрешений
+        
         var resolutionOptions = new List<string>();
         int currentResolutionIndex = 0;
 
@@ -29,12 +29,12 @@ public class ScreenSettings : MonoBehaviour
         {
             string option = $"{resolutions[i].width} x {resolutions[i].height}";
 
-            // Избегаем дублирования разрешений
+            
             if (!resolutionOptions.Contains(option))
             {
                 resolutionOptions.Add(option);
 
-                // Сохраняем текущий индекс разрешения
+                
                 if (resolutions[i].width == Screen.currentResolution.width &&
                     resolutions[i].height == Screen.currentResolution.height)
                 {
@@ -47,16 +47,16 @@ public class ScreenSettings : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        // Добавляем обработчик для применения разрешения при изменении значения в Dropdown
+        
         resolutionDropdown.onValueChanged.AddListener(delegate { ApplyResolution(); });
     }
 
-    // Метод для применения выбранного разрешения
+    
     public void ApplyResolution()
     {
         int resolutionIndex = resolutionDropdown.value;
 
-        // Применяем разрешение с текущей частотой обновления
+        // ГЏГ°ГЁГ¬ГҐГ­ГїГҐГ¬ Г°Г Г§Г°ГҐГёГҐГ­ГЁГҐ Г± ГІГҐГЄГіГ№ГҐГ© Г·Г Г±ГІГ®ГІГ®Г© Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї
         foreach (Resolution res in resolutions)
         {
             string selectedOption = $"{res.width} x {res.height}";
