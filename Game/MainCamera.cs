@@ -6,11 +6,11 @@ public class AttachedCameraMovement : MonoBehaviour
 {
     public Transform target;
     public Vector3 offset;
-    private Vector3 initialOffset; // Исходное смещение камеры
+    private Vector3 initialOffset; 
     public float moveSpeed = 10.0f;
     public float lookSpeed = 2.0f;
     private bool cursorLocked = true;
-    private bool cameraFixed = false; // Флаг для фиксации камеры
+    private bool cameraFixed = false; 
     private Quaternion cameraRotation;
     public Button pauseButton;
     public Button toggleButton;
@@ -25,14 +25,14 @@ public class AttachedCameraMovement : MonoBehaviour
     private int currentJumps;
     private bool isGrounded = false;
 
-    private Vector3 fixedPosition; // Сохранённая позиция камеры
+    private Vector3 fixedPosition; 
 
     void Start()
     {
         if (target != null)
         {
             offset = transform.position - target.position;
-            initialOffset = offset; // Сохраняем исходное смещение
+            initialOffset = offset; 
             targetRigidbody = target.GetComponent<Rigidbody>();
         }
 
@@ -57,8 +57,8 @@ public class AttachedCameraMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            ToggleCameraLock(); // Переключаем фиксацию камеры
-            ToggleButtonVisibility(); // Переключаем видимость UI
+            ToggleCameraLock(); 
+            ToggleButtonVisibility(); 
         }
 
         if (!cameraFixed && target != null && cursorLocked && !isPaused)
@@ -71,20 +71,19 @@ public class AttachedCameraMovement : MonoBehaviour
             transform.RotateAround(target.position, Vector3.up, mouseX);
             transform.RotateAround(target.position, transform.right, mouseY);
 
-            offset = transform.position - target.position; // Обновляем смещение
+            offset = transform.position - target.position; 
         }
         else if (cameraFixed)
         {
-            // Удерживаем фиксированную позицию
             transform.position = fixedPosition;
         }
 
-        if (Input.GetKey(KeyCode.Q)) // Перемещение вверх
+        if (Input.GetKey(KeyCode.Q)) 
         {
             MoveTargetVertically(1.0f * Time.deltaTime * moveSpeed);
         }
 
-        if (Input.GetKey(KeyCode.E)) // Перемещение вниз
+        if (Input.GetKey(KeyCode.E)) 
         {
             MoveTargetVertically(-1.0f * Time.deltaTime * moveSpeed);
         }
@@ -97,24 +96,22 @@ public class AttachedCameraMovement : MonoBehaviour
 
     private void ToggleCameraLock()
     {
-        cameraFixed = !cameraFixed; // Переключаем состояние фиксации камеры
+        cameraFixed = !cameraFixed; 
 
         if (cameraFixed)
         {
-            // Сохраняем текущую позицию, чтобы зафиксировать камеру
+            
             fixedPosition = transform.position;
 
-            // Разблокируем курсор и делаем его видимым
+            
             LockCursor(false);
         }
         else
         {
-            // Возвращаем камеру в исходную позицию и смещение
+            
             offset = initialOffset;
             transform.position = target.position + offset;
-            transform.rotation = cameraRotation; // Восстанавливаем изначальный угол
-
-            // Скрываем курсор
+            transform.rotation = cameraRotation; 
             LockCursor(true);
         }
     }
@@ -133,10 +130,10 @@ public class AttachedCameraMovement : MonoBehaviour
     {
         if (target == null) return;
 
-        // Ограничиваем новое положение в диапазоне minY и maxY
+        
         float newY = Mathf.Clamp(target.position.y + deltaY, minY, maxY);
 
-        // Перемещаем объект
+        
         target.position = new Vector3(target.position.x, newY, target.position.z);
     }
 
