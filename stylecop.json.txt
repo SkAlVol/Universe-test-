@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "documentationRules": {
+      "companyName": "Valvakov",
+      "copyrightText": "Copyright © 2024"
+    }
+  }
+}
