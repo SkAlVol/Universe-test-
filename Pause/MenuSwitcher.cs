@@ -3,13 +3,13 @@ using UnityEngine.EventSystems;
 
 public class MenuSwitcher : MonoBehaviour
 {
-    public GameObject pauseMenuCanvas;      // Canvas для меню паузы
-    public GameObject settingsMenuCanvas;   // Canvas для меню настроек
-    private bool isSettingsOpen = false;    // Флаг для отслеживания состояния меню настроек
+    public GameObject pauseMenuCanvas;      
+    public GameObject settingsMenuCanvas;   
+    private bool isSettingsOpen = false;    
 
     void Start()
     {
-        // Убеждаемся, что Canvas паузы включен, а Canvas настроек отключен при старте
+        
         if (pauseMenuCanvas != null)
         {
             pauseMenuCanvas.SetActive(true);
@@ -20,7 +20,7 @@ public class MenuSwitcher : MonoBehaviour
             settingsMenuCanvas.SetActive(false);
         }
 
-        // Проверка на наличие EventSystem, если его нет - создаем его
+        
         if (FindObjectOfType<EventSystem>() == null)
         {
             GameObject eventSystem = new GameObject("EventSystem");
@@ -31,23 +31,23 @@ public class MenuSwitcher : MonoBehaviour
 
     void Update()
     {
-        // Проверка на нажатие клавиши Escape для переключения между меню паузы и настройками
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isSettingsOpen)
             {
-                CloseSettings();  // Закрываем меню настроек, возвращаемся к паузе
+                CloseSettings();  // Г‡Г ГЄГ°Г»ГўГ ГҐГ¬ Г¬ГҐГ­Гѕ Г­Г Г±ГІГ°Г®ГҐГЄ, ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬Г±Гї ГЄ ГЇГ ГіГ§ГҐ
             }
-            else if (pauseMenuCanvas.activeSelf) // Если активно меню паузы
+            else if (pauseMenuCanvas.activeSelf) // Г…Г±Г«ГЁ Г ГЄГІГЁГўГ­Г® Г¬ГҐГ­Гѕ ГЇГ ГіГ§Г»
             {
-                OpenSettings();   // Открываем меню настроек
+                OpenSettings();   // ГЋГІГЄГ°Г»ГўГ ГҐГ¬ Г¬ГҐГ­Гѕ Г­Г Г±ГІГ°Г®ГҐГЄ
             }
         }
     }
 
     public void OpenSettings()
     {
-        // Отключаем Canvas паузы и включаем Canvas настроек
+        
         if (pauseMenuCanvas != null)
         {
             pauseMenuCanvas.SetActive(false);
@@ -58,12 +58,12 @@ public class MenuSwitcher : MonoBehaviour
             settingsMenuCanvas.SetActive(true);
         }
 
-        isSettingsOpen = true; // Устанавливаем флаг для отслеживания состояния меню настроек
+        isSettingsOpen = true; // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГґГ«Г ГЈ Г¤Г«Гї Г®ГІГ±Г«ГҐГ¦ГЁГўГ Г­ГЁГї Г±Г®Г±ГІГ®ГїГ­ГЁГї Г¬ГҐГ­Гѕ Г­Г Г±ГІГ°Г®ГҐГЄ
     }
 
     public void CloseSettings()
     {
-        // Включаем Canvas паузы и отключаем Canvas настроек
+        
         if (pauseMenuCanvas != null)
         {
             pauseMenuCanvas.SetActive(true);
@@ -74,6 +74,6 @@ public class MenuSwitcher : MonoBehaviour
             settingsMenuCanvas.SetActive(false);
         }
 
-        isSettingsOpen = false; // Сбрасываем флаг, так как настройки закрыты
+        isSettingsOpen = false; 
     }
 }
