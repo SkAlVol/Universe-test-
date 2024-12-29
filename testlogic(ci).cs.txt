@@ -1,0 +1,16 @@
+using NUnit.Framework;
+
+public class CameraMovementTests
+{
+    [Test]
+    public void Camera_Offset_InitializedCorrectly()
+    {
+        var cameraMovement = new GameObject().AddComponent<AttachedCameraMovement>();
+        var target = new GameObject().transform;
+        cameraMovement.target = target;
+
+        cameraMovement.Start();
+
+        Assert.AreNotEqual(Vector3.zero, cameraMovement.offset, "Offset не має бути нульовим після ініціалізації.");
+    }
+}

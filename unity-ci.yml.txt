@@ -1,0 +1,47 @@
+name: Unity CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Клонуємо репозиторій
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Встановлюємо Unity
+    - name: Setup Unity
+      uses: game-ci/unity-builder@v2
+      with:
+        unityVersion: 2023.3.0f1 # Замініть на версію Unity вашого проєкту
+
+    # Збираємо проєкт
+    - name: Build project
+      uses: game-ci/unity-builder@v2
+      with:
+        projectPath: .
+        unityVersion: 2023.3.0f1 # Замініть на версію Unity вашого проєкту
+        targetPlatform: StandaloneWindows64 # Збірка для Windows
+
+    # Тестуємо проєкт
+    - name: Run tests
+      uses: game-ci/unity-test-runner@v2
+      with:
+        projectPath: .
+        unityVersion: 2023.3.0f1 # Замініть на версію Unity вашого проєкту
+
+    # Аналіз коду
+    - name: Code Analysis (RiderLint)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-11-jdk
+        curl -sS https://download.jetbrains.com/resharper/JetBrains.Rider.CommandLineTools.2023.2.0.tar.gz | tar xz -C /tmp
+        /tmp/JetBrains.Rider.CommandLineTools.2023.2.0/bin/inspectcode.sh YourSolution.sln -o=CodeAnalysisResults.xml
